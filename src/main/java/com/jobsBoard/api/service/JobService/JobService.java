@@ -1,4 +1,4 @@
-package com.jobsBoard.api.service;
+package com.jobsBoard.api.service.JobService;
 
 import com.jobsBoard.api.entity.Job;
 

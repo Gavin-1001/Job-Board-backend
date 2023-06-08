@@ -1,6 +1,6 @@
 package com.jobsBoard.api.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,6 +41,9 @@ public class Job {
 
     @Column()
     private String jobSalary;
+
+    @Column()
+    private String jobCategory;
 
 
 

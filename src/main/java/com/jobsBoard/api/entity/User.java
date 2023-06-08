@@ -1,6 +1,6 @@
 package com.jobsBoard.api.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -14,6 +14,30 @@ public class User {
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     @Column(name = "id", unique = true)
     private String id;
+
+
+    @Column(name = "username", unique = true, nullable = false, length = 100)
+    private String username;
+
+    private String password;
+
+    @Transient
+    private String accessToken;
+
+    @Transient
+    private String refreshToken;
+
+    @Enumerated(EnumType.STRING)
+    //@Column(name = "role")
+    @Column(name = "role", nullable = false)
+    private Role role;
+
+    public User(String id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+    public User(){}
 
     @Column()
     private String firstName;
@@ -33,6 +57,11 @@ public class User {
     @Column()
     private String homeAddress;
 
+    /*
+    @Column()
+    private String cvUrl;
+
+     */
     //add a url for uploading cv
 
 

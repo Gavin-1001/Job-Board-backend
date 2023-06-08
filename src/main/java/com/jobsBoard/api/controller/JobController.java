@@ -1,7 +1,7 @@
 package com.jobsBoard.api.controller;
 
 import com.jobsBoard.api.entity.Job;
-import com.jobsBoard.api.service.JobService;
+import com.jobsBoard.api.service.JobService.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
