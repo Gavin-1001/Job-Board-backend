@@ -87,6 +87,7 @@ public class JwtProviderImpl implements JwtProvider {
                 .getBody();
     }
 
+    @Override
     public boolean isTokenValid(HttpServletRequest request){
         Claims claims = extractClaims(request);
         if(claims == null){
