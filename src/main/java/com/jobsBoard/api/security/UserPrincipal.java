@@ -1,6 +1,6 @@
 package com.jobsBoard.api.security;
 
-import com.jobsBoard.api.entity.User;
+import com.jobsBoard.api.entity.AuthUser;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,12 +15,12 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserPrinciple implements UserDetails {
+public class UserPrincipal implements UserDetails {
 
     private String id;
     private String username;
     transient private String password;
-    transient private User user;
+    transient private AuthUser user;
 
     private Set<GrantedAuthority> authorities;
 

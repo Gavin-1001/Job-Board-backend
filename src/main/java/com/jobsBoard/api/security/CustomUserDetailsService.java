@@ -1,6 +1,6 @@
 package com.jobsBoard.api.security;
 
-import com.jobsBoard.api.entity.User;
+import com.jobsBoard.api.entity.AuthUser;
 import com.jobsBoard.api.service.UserService.UserService;
 import com.jobsBoard.api.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +20,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
+        AuthUser user = userService.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
 
         Set<GrantedAuthority> authorities = Set.of(SecurityUtils.convertToAuthority(user.getRole().name()));
 
 
 
-        return UserPrinciple.builder()
+        return UserPrincipal.builder()
                 .user(user)
                 .id(user.getId())
                 .username(user.getUsername())

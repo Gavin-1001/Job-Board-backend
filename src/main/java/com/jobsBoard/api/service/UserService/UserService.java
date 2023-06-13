@@ -1,11 +1,11 @@
 package com.jobsBoard.api.service.UserService;
 
-import com.jobsBoard.api.entity.User;
+import com.jobsBoard.api.entity.AuthUser;
 
 import java.util.Optional;
 
 public interface UserService {
-    User saveUser(User user);
+    AuthUser saveUser(AuthUser user);
 
-    Optional<User> findByUsername(String username);
+    Optional<AuthUser> findByUsername(String username);
 }

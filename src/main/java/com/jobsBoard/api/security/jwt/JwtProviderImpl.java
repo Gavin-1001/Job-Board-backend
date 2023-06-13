@@ -1,6 +1,6 @@
 package com.jobsBoard.api.security.jwt;
 
-import com.jobsBoard.api.security.UserPrinciple;
+import com.jobsBoard.api.security.UserPrincipal;
 import com.jobsBoard.api.util.SecurityUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -32,7 +32,7 @@ public class JwtProviderImpl implements JwtProvider {
 
 
     @Override
-    public String generateToken(UserPrinciple auth) {
+    public String generateToken(UserPrincipal auth) {
         String authorities = auth.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority).collect(Collectors.joining(","));
 
@@ -53,13 +53,13 @@ public class JwtProviderImpl implements JwtProvider {
             return null;
         }
         String username = claims.getSubject();
-        Long userId = claims.get("userId", Long.class);
+        String userId = claims.get("userId", String.class);
 
         Set<GrantedAuthority> authorities = Arrays.stream(claims.get("roles").toString().split(","))
                 .map(SecurityUtils::convertToAuthority)
                 .collect(Collectors.toSet());
 
-        UserDetails userDetails = UserPrinciple.builder()
+        UserDetails userDetails = UserPrincipal.builder()
                 .username(username)
                 .authorities(authorities)
                 .id(String.valueOf(userId))

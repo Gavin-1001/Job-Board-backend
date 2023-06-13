@@ -1,7 +1,7 @@
 package com.jobsBoard.api.service.AuthenticationService;
 
-import com.jobsBoard.api.entity.User;
-import com.jobsBoard.api.security.UserPrinciple;
+import com.jobsBoard.api.entity.AuthUser;
+import com.jobsBoard.api.security.UserPrincipal;
 import com.jobsBoard.api.security.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,13 +19,13 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     private JwtProvider jwtProvider;
 
     @Override
-    public User signInAndReturnJWT(User signInRequest){
+    public AuthUser signInAndReturnJWT(AuthUser signInRequest){
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(signInRequest.getUsername(), signInRequest.getPassword())
         );
-        UserPrinciple userPrinciple = (UserPrinciple) authentication.getPrincipal();
+        UserPrincipal userPrinciple = (UserPrincipal) authentication.getPrincipal();
         String jwt = jwtProvider.generateToken(userPrinciple);
-        User signInUser = userPrinciple.getUser();
+        AuthUser signInUser = userPrinciple.getUser();
 
         signInUser.setAccessToken(jwt);
         return signInUser;

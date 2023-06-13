@@ -1,7 +1,7 @@
 package com.jobsBoard.api.service.AuthenticationService;
 
-import com.jobsBoard.api.entity.User;
+import com.jobsBoard.api.entity.AuthUser;
 
 public interface AuthenticationService {
-    User signInAndReturnJWT(User signInRequest);
+    AuthUser signInAndReturnJWT(AuthUser signInRequest);
 }
