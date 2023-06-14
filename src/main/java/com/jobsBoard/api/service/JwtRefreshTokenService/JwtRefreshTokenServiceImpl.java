@@ -3,6 +3,7 @@ package com.jobsBoard.api.service.JwtRefreshTokenService;
 import com.jobsBoard.api.entity.JwtRefreshToken;
 import com.jobsBoard.api.entity.AuthUser;
 import com.jobsBoard.api.repository.JwtRefreshTokenRepository;
+import com.jobsBoard.api.repository.UserAuthRepository;
 import com.jobsBoard.api.repository.UserRepository;
 import com.jobsBoard.api.security.UserPrincipal;
 import com.jobsBoard.api.security.jwt.JwtProvider;
@@ -27,7 +28,7 @@ public class JwtRefreshTokenServiceImpl implements JwtRefreshTokenService{
     private JwtRefreshTokenRepository jwtRefreshTokenRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserAuthRepository userAuthRepository;
 
     @Autowired
     private JwtProvider jwtProvider;
@@ -53,7 +54,7 @@ public class JwtRefreshTokenServiceImpl implements JwtRefreshTokenService{
             throw new RuntimeException("JWT REFRESH TOKEN IS NOT VALID");
         }
 
-        AuthUser user = userRepository.findById(jwtRefreshToken.getUserId()).orElseThrow();
+        AuthUser user = userAuthRepository.findById(Long.valueOf(jwtRefreshToken.getUserId())).orElseThrow();
 
         UserPrincipal userPrincipal = UserPrincipal.builder()
                 .id(user.getId())

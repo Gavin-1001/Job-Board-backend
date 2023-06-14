@@ -17,17 +17,14 @@ public class AuthController {
     private AuthenticationService authenticationService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private JwtRefreshTokenService jwtRefreshTokenService;
 
     @PostMapping("/register")
     public ResponseEntity<?> signUp(@RequestBody AuthUser user) throws RuntimeException {
-        if (userService.findByUsername(user.getUsername()).isPresent())  {
+        if (authenticationService.findByUsername(user.getUsername()).isPresent())  {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(authenticationService.saveUser(user), HttpStatus.CREATED);
     }
 
     @PostMapping("/signin")

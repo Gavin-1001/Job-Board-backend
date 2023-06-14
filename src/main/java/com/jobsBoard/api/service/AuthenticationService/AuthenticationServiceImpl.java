@@ -1,13 +1,19 @@
 package com.jobsBoard.api.service.AuthenticationService;
 
 import com.jobsBoard.api.entity.AuthUser;
+import com.jobsBoard.api.entity.Role;
+import com.jobsBoard.api.repository.UserAuthRepository;
+import com.jobsBoard.api.repository.UserRepository;
 import com.jobsBoard.api.security.UserPrincipal;
 import com.jobsBoard.api.security.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService{
@@ -30,6 +36,31 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         signInUser.setAccessToken(jwt);
         return signInUser;
     }
+
+
+
+    @Autowired
+    private UserAuthRepository userAuthRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserRepository userRepository;
+
+
+    @Override
+    public AuthUser saveUser(AuthUser user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.USER);
+        return userAuthRepository.save(user);
+    }
+
+    @Override
+    public Optional<AuthUser> findByUsername(String username){
+        return userAuthRepository.findByUsername(username);
+    }
+
 
 
 }

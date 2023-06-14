@@ -30,8 +30,8 @@ public class UserController {
 
     //test only
     @GetMapping("getAll")
-    public List<AuthUser> getAll(){
-        return userRepository.findAll();
+    public List<User> getAll(){
+       return userService.getAllUsers();
     }
 
 }
