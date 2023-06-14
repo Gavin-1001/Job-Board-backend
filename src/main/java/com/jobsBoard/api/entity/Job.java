@@ -45,9 +45,4 @@ public class Job {
     @Column()
     private String jobCategory;
 
-
-
-
-
-
 }

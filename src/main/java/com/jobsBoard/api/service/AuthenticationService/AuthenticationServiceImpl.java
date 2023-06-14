@@ -52,7 +52,11 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     @Override
     public AuthUser saveUser(AuthUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(Role.USER);
+        if(!user.getJobSeekerBool()){
+            user.setRole(Role.EMPLOYER);
+        }else {
+            user.setRole(Role.USER);
+        }
         return userAuthRepository.save(user);
     }
 

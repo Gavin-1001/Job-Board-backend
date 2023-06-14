@@ -32,10 +32,14 @@ public class AuthUser {
     @Column(name = "role", nullable = false)
     private Role role;
 
-    public AuthUser(String id, String username, String password) {
+    @Column()
+    private Boolean jobSeekerBool;
+
+    public AuthUser(String id, String username, String password, Boolean jobSeekerBool) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.jobSeekerBool = jobSeekerBool;
     }
     public AuthUser(){}
 
