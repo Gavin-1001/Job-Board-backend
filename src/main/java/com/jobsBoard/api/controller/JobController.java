@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/jobs")
 public class JobController {
@@ -33,4 +35,34 @@ public class JobController {
     public void deleteJob(@PathVariable("id") String id){
         jobService.deleteJobById(id);
     }
+
+
+    @GetMapping("findJobByTitle/{jobTitle}")
+    public List<Job> findJobByJobTitle(@PathVariable String jobTitle){
+        return jobService.findJobByJobTitle(jobTitle);
+    }
+
+    @GetMapping("findJobByLocation/{jobLocation}")
+    public List<Job> getJobByJobLocation(@PathVariable String jobLocation){
+        return jobService.getJobByJobLocation(jobLocation);
+    }
+
+    @GetMapping("findJobBySalary/{jobSalary}")
+    public List<Job> findJobByJobSalary(@PathVariable String jobSalary){
+        return jobService.findJobByJobSalary(jobSalary);
+    }
+
+    @GetMapping("findJobByCategory/{jobCategory}")
+    public List<Job> findJobByJobCategory(@PathVariable String jobCategory) {
+        return jobService.findJobByJobCategory(jobCategory);
+    }
+
+    @GetMapping("findJobByQualification/{jobQualification}")
+    public List<Job> findJobByJobQualification(@PathVariable String jobQualification){
+        return jobService.findJobByJobQualification(jobQualification);
+    }
+
+//do sort by dateCreated / When job was posted
 }
+
+// see the stackoverflow for issue with the /findJob same url different request params

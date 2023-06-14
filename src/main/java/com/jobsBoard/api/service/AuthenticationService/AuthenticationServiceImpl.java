@@ -45,9 +45,6 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private UserRepository userRepository;
-
 
     @Override
     public AuthUser saveUser(AuthUser user) {

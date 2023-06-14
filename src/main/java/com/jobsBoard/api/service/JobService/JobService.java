@@ -14,4 +14,14 @@ public interface JobService {
     Job getJobById(String id);
 
     void deleteJobById(String id);
+
+    List<Job> findJobByJobTitle(String jobTitle);
+
+    List<Job> getJobByJobLocation(String jobLocation);
+
+    List<Job> findJobByJobSalary(String jobSalary);
+
+    List<Job> findJobByJobCategory(String jobCategory);
+
+    List<Job> findJobByJobQualification(String jobQualification);
 }
