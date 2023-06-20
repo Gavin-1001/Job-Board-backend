@@ -1,6 +1,8 @@
 package com.jobsBoard.api.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -19,6 +21,7 @@ public class AuthUser {
     @Column(name = "username", unique = true, nullable = false, length = 100)
     private String username;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Transient
@@ -33,9 +36,9 @@ public class AuthUser {
     private Role role;
 
     @Column()
-    private Boolean jobSeekerBool;
+    private String jobSeekerBool;
 
-    public AuthUser(String id, String username, String password, Boolean jobSeekerBool) {
+    public AuthUser(String id, String username, String password, String jobSeekerBool) {
         this.id = id;
         this.username = username;
         this.password = password;
