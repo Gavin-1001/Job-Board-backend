@@ -52,6 +52,7 @@ public class JwtProviderImpl implements JwtProvider {
         if (claims == null) {
             return null;
         }
+
         String username = claims.getSubject();
         String userId = claims.get("userId", String.class);
 

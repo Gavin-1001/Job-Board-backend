@@ -3,7 +3,6 @@ package com.jobsBoard.api.service.AuthenticationService;
 import com.jobsBoard.api.entity.AuthUser;
 import com.jobsBoard.api.entity.Role;
 import com.jobsBoard.api.repository.UserAuthRepository;
-import com.jobsBoard.api.repository.UserRepository;
 import com.jobsBoard.api.security.UserPrincipal;
 import com.jobsBoard.api.security.jwt.JwtProvider;
 import com.jobsBoard.api.service.JwtRefreshTokenService.JwtRefreshTokenService;
@@ -58,13 +57,10 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     @Override
     public AuthUser saveUser(AuthUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if(Objects.equals(user.getJobSeekerBool(), "true")){
-            user.setRole(Role.USER);
-        }else {
-            user.setRole(Role.EMPLOYER);
-        }
-        user.setRole(Role.USER);
+            //if statement for user or employer was here
+        user.setRole(Role.EMPLOYER);
         return userAuthRepository.save(user);
+
     }
 
     @Override

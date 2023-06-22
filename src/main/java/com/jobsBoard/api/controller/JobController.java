@@ -62,6 +62,8 @@ public class JobController {
         return jobService.findJobByJobQualification(jobQualification);
     }
 
+    //findJobByUser -> show the jobseeker the list of jobs they have applied for
+
 //do sort by dateCreated / When job was posted
 }
 
