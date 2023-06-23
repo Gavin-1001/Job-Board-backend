@@ -64,6 +64,11 @@ public class JobController {
 
     //findJobByUser -> show the jobseeker the list of jobs they have applied for
 
+//    @GetMapping("findByJobsApplied")
+//    public List<Job> findByJobsApplied(@RequestBody ){
+//        return jobService.findJobByApplied()
+//    } need a join table
+
 //do sort by dateCreated / When job was posted
 }
 
