@@ -1,11 +1,16 @@
 package com.jobsBoard.api.service.JobService;
 
+import com.jobsBoard.api.entity.AuthUser;
 import com.jobsBoard.api.entity.Job;
 import com.jobsBoard.api.repository.JobRepository;
+import com.jobsBoard.api.repository.UserAuthRepository;
+import com.jobsBoard.api.service.AuthenticationService.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -14,11 +19,21 @@ public class JobServiceImpl implements JobService{
     @Autowired
     private JobRepository jobRepository;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
+    @Autowired
+    private UserAuthRepository userAuthRepository;
+
+
     @Override
     public Job createJob(Job job) {
         job.setJobDateCreated(LocalDateTime.now());
+        //AuthUser user = authenticationService.findById(userId).orElse(null);
+
         return jobRepository.save(job);
     }
+
 
     @Override
     public List<Job> getAllJobs() {
@@ -60,4 +75,19 @@ public class JobServiceImpl implements JobService{
         return jobRepository.findJobByJobQualifications(jobQualification);
     }
 
+    @Override
+    public List<Job> findJobByEmployerAuthor(String employerAuthor){
+        return jobRepository.findJobByEmployerAuthor(employerAuthor);
+    }
+
+    public List<Job> getJobsCreatedBy(Long userId){
+        AuthUser user = userAuthRepository.findById(userId).orElseThrow(null);
+        if(user != null){
+            return jobRepository.findByEmployerAuthor(user);
+        }
+        return Collections.emptyList();
+    }
+
+
 }
+

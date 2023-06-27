@@ -31,6 +31,9 @@ public class Job {
     private String jobDescription;
 
     @Column()
+    private String companyName;
+
+    @Column()
     private String jobLocation;
 
     @Column()
@@ -44,5 +47,15 @@ public class Job {
 
     @Column()
     private String jobCategory;
+
+    @Column()
+    private String employerAuthor;
+
+    //@Column()
+    //private Boolean appliedForJob;
+
+//    @ManyToOne
+//    @JoinColumn(name="authUserId")
+//    private AuthUser authUser;
 
 }

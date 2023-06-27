@@ -24,4 +24,6 @@ public interface JobService {
     List<Job> findJobByJobCategory(String jobCategory);
 
     List<Job> findJobByJobQualification(String jobQualification);
+
+    List<Job> findJobByEmployerAuthor(String employerAuthor);
 }

@@ -21,20 +21,26 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> signUp(@RequestBody AuthUser user) throws RuntimeException {
-        if (authenticationService.findByUsername(user.getUsername()).isPresent())  {
+        if (authenticationService.findByUsername(user.getUsername()).isPresent()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(authenticationService.saveUser(user), HttpStatus.CREATED);
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> signIn(@RequestBody AuthUser user){
+    public ResponseEntity<?> signIn(@RequestBody AuthUser user) {
         return new ResponseEntity<>(authenticationService.signInAndReturnJWT(user), HttpStatus.OK);
     }
 
     @PostMapping("/refreshToken")
-    public ResponseEntity<?> refreshToken(@RequestParam String token){
+    public ResponseEntity<?> refreshToken(@RequestParam String token) {
         return ResponseEntity.ok(jwtRefreshTokenService.generateAccessTokenFromRefreshToken(token));
+    }
+
+
+    @GetMapping("/getUserId")
+    public ResponseEntity<?> getId(@RequestBody AuthUser user) {
+        return ResponseEntity.ok(authenticationService.getUserId(user.getId()).toString());
     }
 
 

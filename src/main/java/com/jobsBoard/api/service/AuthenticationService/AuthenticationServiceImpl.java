@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -23,10 +22,17 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     private AuthenticationManager authenticationManager;
 
     @Autowired
+    private UserAuthRepository userAuthRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private JwtProvider jwtProvider;
 
     @Autowired
     private JwtRefreshTokenService jwtRefreshTokenService;
+
 
     @Override
     public AuthUser signInAndReturnJWT(AuthUser signInRequest){
@@ -47,12 +53,6 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 
 
 
-    @Autowired
-    private UserAuthRepository userAuthRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
 
     @Override
     public AuthUser saveUser(AuthUser user) {
@@ -68,6 +68,10 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         return userAuthRepository.findByUsername(username);
     }
 
+    @Override
+    public AuthUser getUserId(String id) {
+        return userAuthRepository.getById(Long.valueOf(id));
+    }
 
 
 }

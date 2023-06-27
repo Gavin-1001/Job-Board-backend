@@ -10,4 +10,6 @@ public interface AuthenticationService {
     AuthUser saveUser(AuthUser user);
 
     Optional<AuthUser> findByUsername(String username);
+
+    AuthUser getUserId(String id);
 }

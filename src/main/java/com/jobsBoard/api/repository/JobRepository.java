@@ -1,5 +1,6 @@
 package com.jobsBoard.api.repository;
 
+import com.jobsBoard.api.entity.AuthUser;
 import com.jobsBoard.api.entity.Job;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -24,4 +25,8 @@ public interface JobRepository extends JpaRepository<Job, String> {
     List<Job> findJobByJobCategory(String jobCategory);
 
     List<Job> findJobByJobQualifications(String jobQualification);
+
+    List<Job> findJobByEmployerAuthor(String employerAuthor);
+
+    List<Job> findByEmployerAuthor(AuthUser user);
 }

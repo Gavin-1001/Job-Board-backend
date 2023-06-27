@@ -62,6 +62,11 @@ public class JobController {
         return jobService.findJobByJobQualification(jobQualification);
     }
 
+    @GetMapping("findJobByEmployerAuthor/{employerAuthor}")
+    public List<Job> findJObByEmployerAuthor(@PathVariable String employerAuthor){
+        return jobService.findJobByEmployerAuthor(employerAuthor);
+    }
+
     //findJobByUser -> show the jobseeker the list of jobs they have applied for
 
 //    @GetMapping("findByJobsApplied")
