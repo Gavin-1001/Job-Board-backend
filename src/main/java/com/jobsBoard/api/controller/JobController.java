@@ -36,6 +36,11 @@ public class JobController {
         jobService.deleteJobById(id);
     }
 
+    @PutMapping("/update/{id}")
+    public void updateJob(@PathVariable("id") String id, @RequestBody Job job){
+        jobService.updateJob(id, job);
+    }
+
 
     @GetMapping("findJobByTitle/{jobTitle}")
     public List<Job> findJobByJobTitle(@PathVariable String jobTitle){

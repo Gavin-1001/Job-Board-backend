@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -50,6 +49,37 @@ public class JobServiceImpl implements JobService{
         jobRepository.deleteJobById(id);
     }
 
+
+    @Override
+    public Job updateJob(String id, Job job) {
+        Job updateJob = jobRepository.findById(job.getId()).get();
+        if(job.getJobTitle() != null && !job.getJobTitle().isEmpty()){
+            updateJob.setJobTitle(job.getJobTitle());
+        }
+        if(job.getJobDescription() != null && !job.getJobDescription().isEmpty()){
+            updateJob.setJobDescription(job.getJobDescription());
+        }
+        if(job.getJobSalary() != null && !job.getJobSalary().isEmpty()){
+            updateJob.setJobSalary(job.getJobSalary());
+        }
+        if(job.getJobLocation() != null && !job.getJobLocation().isEmpty()){
+            updateJob.setJobLocation(job.getJobLocation());
+        }
+        if(job.getJobStartDate() != null && !job.getJobStartDate().isEmpty()){
+            updateJob.setJobStartDate(job.getJobStartDate());
+        }
+        if(job.getJobQualifications() != null && !job.getJobQualifications().isEmpty()){
+            updateJob.setJobQualifications(job.getJobQualifications());
+        }
+        if(job.getJobCategory() != null && !job.getJobCategory().isEmpty()){
+            updateJob.setJobCategory(job.getJobCategory());
+        }
+        updateJob = jobRepository.save(updateJob);
+        return updateJob;
+
+    }
+
+
     @Override
     public List<Job> findJobByJobTitle(String jobTitle) {
         return jobRepository.findJobByJobTitle(jobTitle);
@@ -79,6 +109,7 @@ public class JobServiceImpl implements JobService{
     public List<Job> findJobByEmployerAuthor(String employerAuthor){
         return jobRepository.findJobByEmployerAuthor(employerAuthor);
     }
+
 
     public List<Job> getJobsCreatedBy(Long userId){
         AuthUser user = userAuthRepository.findById(userId).orElseThrow(null);
