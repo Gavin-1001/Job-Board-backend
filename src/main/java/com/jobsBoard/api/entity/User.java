@@ -29,7 +29,29 @@ public class User {
     private String phoneNumber;
 
     @Column()
-    private String homeAddress;
+    private String userGender;
+
+    @Column()
+    private String streetAddress;
+
+    @Column()
+    private String homeCity;
+
+    @Column()
+    private String homeAreaCode;
+
+    @Column()
+    private String homeCountry;
+
+
+    @Column()
+    private String collegeDegree;
+
+    @Column()
+    private String collegeName;
+
+    @Column()
+    private String collegeGrade;
 
     /*
     @Column()
@@ -39,14 +61,18 @@ public class User {
 //    add a url for uploading cv
 
 
-    public User(Long id, String firstName, String lastName, String emailAddress, String dateOfBirth, String phoneNumber, String homeAddress) {
+    public User(Long id, String firstName, String lastName, String emailAddress, String dateOfBirth, String phoneNumber, String streetAddress, String collegeDegree, String collegeName, String collegeGrade) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.dateOfBirth = dateOfBirth;
         this.phoneNumber = phoneNumber;
-        this.homeAddress = homeAddress;
+        this.streetAddress = streetAddress;
+        this.collegeDegree = collegeDegree;
+        this.collegeName = collegeName;
+        this.collegeGrade = collegeGrade;
+
     }
 
     public User(){}

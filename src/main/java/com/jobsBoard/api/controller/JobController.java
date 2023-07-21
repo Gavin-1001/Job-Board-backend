@@ -17,43 +17,53 @@ public class JobController {
     private JobService jobService;
 
     @PostMapping("/create")
-    private ResponseEntity<Job> createAJob(@RequestBody Job job){
+    private ResponseEntity<Job> createAJob(@RequestBody Job job) {
         return ResponseEntity.ok(jobService.createJob(job));
     }
 
     @GetMapping("/getAllJobs")
-    public ResponseEntity<?> getAllJobs(){
+    public ResponseEntity<?> getAllJobs() {
         return ResponseEntity.ok(jobService.getAllJobs());
     }
 
     @GetMapping("/getJobById/{id}")
-    public ResponseEntity<Job> getJobById(@PathVariable String id){
+    public ResponseEntity<Job> getJobById(@PathVariable String id) {
         return ResponseEntity.ok(jobService.getJobById(id));
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteJob(@PathVariable("id") String id){
+    public void deleteJob(@PathVariable("id") String id) {
         jobService.deleteJobById(id);
     }
 
+//    @PutMapping("/update/{id}")
+//    public void updateJob(@PathVariable("id") String id, @RequestBody Job job) {
+//        jobService.updateJob(id, job);
+//    }
+
     @PutMapping("/update/{id}")
-    public void updateJob(@PathVariable("id") String id, @RequestBody Job job){
-        jobService.updateJob(id, job);
+    public ResponseEntity<?> updateJob(@RequestBody Job job, @PathVariable String id) {
+        Job updateJob = jobService.updateJob(id, job);
+        if (updateJob == null) {
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.ok(updateJob);
+        }
     }
 
 
     @GetMapping("findJobByTitle/{jobTitle}")
-    public List<Job> findJobByJobTitle(@PathVariable String jobTitle){
+    public List<Job> findJobByJobTitle(@PathVariable String jobTitle) {
         return jobService.findJobByJobTitle(jobTitle);
     }
 
     @GetMapping("findJobByLocation/{jobLocation}")
-    public List<Job> getJobByJobLocation(@PathVariable String jobLocation){
+    public List<Job> getJobByJobLocation(@PathVariable String jobLocation) {
         return jobService.getJobByJobLocation(jobLocation);
     }
 
     @GetMapping("findJobBySalary/{jobSalary}")
-    public List<Job> findJobByJobSalary(@PathVariable String jobSalary){
+    public List<Job> findJobByJobSalary(@PathVariable String jobSalary) {
         return jobService.findJobByJobSalary(jobSalary);
     }
 
@@ -63,12 +73,12 @@ public class JobController {
     }
 
     @GetMapping("findJobByQualification/{jobQualification}")
-    public List<Job> findJobByJobQualification(@PathVariable String jobQualification){
+    public List<Job> findJobByJobQualification(@PathVariable String jobQualification) {
         return jobService.findJobByJobQualification(jobQualification);
     }
 
     @GetMapping("findJobByEmployerAuthor/{employerAuthor}")
-    public List<Job> findJObByEmployerAuthor(@PathVariable String employerAuthor){
+    public List<Job> findJObByEmployerAuthor(@PathVariable String employerAuthor) {
         return jobService.findJobByEmployerAuthor(employerAuthor);
     }
 

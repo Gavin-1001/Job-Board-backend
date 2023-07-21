@@ -15,6 +15,7 @@ public interface JobService {
 
     void deleteJobById(String id);
 
+
     List<Job> findJobByJobTitle(String jobTitle);
 
     List<Job> getJobByJobLocation(String jobLocation);

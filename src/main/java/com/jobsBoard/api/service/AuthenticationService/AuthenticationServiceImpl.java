@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -51,14 +52,14 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         return signInUser;
     }
 
-
-
-
     @Override
     public AuthUser saveUser(AuthUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
             //if statement for user or employer was here
         user.setRole(Role.EMPLOYER);
+
+        user.setJobSeekerBool(user.getRole() == Role.USER);
+
         return userAuthRepository.save(user);
 
     }
@@ -71,6 +72,11 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     @Override
     public AuthUser getUserId(String id) {
         return userAuthRepository.getById(Long.valueOf(id));
+    }
+
+    @Override
+    public List<AuthUser> getAllAuthUsers() {
+        return userAuthRepository.findAll();
     }
 
 

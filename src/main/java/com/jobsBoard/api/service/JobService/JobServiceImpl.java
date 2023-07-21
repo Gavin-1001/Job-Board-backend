@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class JobServiceImpl implements JobService{
@@ -52,31 +53,49 @@ public class JobServiceImpl implements JobService{
 
     @Override
     public Job updateJob(String id, Job job) {
-        Job updateJob = jobRepository.findById(job.getId()).get();
-        if(job.getJobTitle() != null && !job.getJobTitle().isEmpty()){
-            updateJob.setJobTitle(job.getJobTitle());
-        }
-        if(job.getJobDescription() != null && !job.getJobDescription().isEmpty()){
-            updateJob.setJobDescription(job.getJobDescription());
-        }
-        if(job.getJobSalary() != null && !job.getJobSalary().isEmpty()){
-            updateJob.setJobSalary(job.getJobSalary());
-        }
-        if(job.getJobLocation() != null && !job.getJobLocation().isEmpty()){
-            updateJob.setJobLocation(job.getJobLocation());
-        }
-        if(job.getJobStartDate() != null && !job.getJobStartDate().isEmpty()){
-            updateJob.setJobStartDate(job.getJobStartDate());
-        }
-        if(job.getJobQualifications() != null && !job.getJobQualifications().isEmpty()){
-            updateJob.setJobQualifications(job.getJobQualifications());
-        }
-        if(job.getJobCategory() != null && !job.getJobCategory().isEmpty()){
-            updateJob.setJobCategory(job.getJobCategory());
-        }
-        updateJob = jobRepository.save(updateJob);
-        return updateJob;
+        Job updatedJob = jobRepository.findById(id).get();
 
+
+        //first name
+        if (Objects.nonNull(job.getJobTitle()) && !"".equalsIgnoreCase(job.getJobTitle())) {
+            updatedJob.setJobTitle(job.getJobTitle());
+        }
+
+        //last name
+        if (Objects.nonNull(job.getJobDescription()) && !"".equalsIgnoreCase(job.getJobDescription())) {
+            updatedJob.setJobDescription(job.getJobDescription());
+        }
+
+        //date of birth
+        if (Objects.nonNull(job.getJobSalary()) && !"".equalsIgnoreCase(job.getJobSalary())) {
+            updatedJob.setJobSalary(job.getJobSalary());
+        }
+
+        //email address
+        if (Objects.nonNull(job.getJobLocation()) && !"".equalsIgnoreCase(job.getJobLocation())) {
+            updatedJob.setJobLocation(job.getJobLocation());
+        }
+
+
+        //isActive
+        if (Objects.nonNull(job.getJobStartDate()) && !"".equalsIgnoreCase(job.getJobStartDate())) {
+            updatedJob.setJobStartDate(job.getJobStartDate());
+        }
+
+        if (Objects.nonNull(job.getJobQualifications()) && !"".equalsIgnoreCase(job.getJobQualifications())) {
+            updatedJob.setJobQualifications(job.getJobQualifications());
+        }
+
+        if (Objects.nonNull(job.getJobCategory()) && !"".equalsIgnoreCase(job.getJobCategory())) {
+            updatedJob.setJobCategory(job.getJobCategory());
+        }
+
+        if (Objects.nonNull(job.getCompanyName()) && !"".equalsIgnoreCase(job.getCompanyName())) {
+            updatedJob.setCompanyName(job.getCompanyName());
+        }
+
+
+        return jobRepository.save(updatedJob);
     }
 
 
