@@ -28,10 +28,10 @@ public class UserController {
         return null;
     }
 
-    //test only
-    @GetMapping("getAll")
-    public List<User> getAll(){
-       return userService.getAllUsers();
+    @GetMapping("getUserDetails/{id}")
+    public ResponseEntity<?> getUserDetails( @PathVariable Long id){
+        return ResponseEntity.ok(userService.getUserDetailsById(id));
+    //finds the user by id coming from the frontend, the id will come from currentUser.id and passed to the backend
     }
     
 
